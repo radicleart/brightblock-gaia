@@ -1,4 +1,4 @@
-package org.brightblock.mam.conf;
+package org.brightblock.gaia.conf;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

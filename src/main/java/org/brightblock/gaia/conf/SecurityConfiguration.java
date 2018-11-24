@@ -1,4 +1,4 @@
-package org.brightblock.mam.conf;
+package org.brightblock.gaia.conf;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +13,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     		http.cors().and()
 		.authorizeRequests()
-			.antMatchers("/resources/**", "/lnd/**", "/art/**", "/greeting", "/signup", "/", "/about", "/courses/**").permitAll()
+			.antMatchers("/resources/**", "/lnd/**", "/api/**", "/greeting", "/signup", "/", "/about", "/courses/**").permitAll()
 			.anyRequest().permitAll() //.authenticated()
 			.and().csrf().disable()
 		.formLogin()

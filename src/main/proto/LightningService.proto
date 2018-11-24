@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 //package brightblock;
 package lnrpc;
-option java_package = "org.brightblock.mam.lightning.proto";
+option java_package = "org.brightblock.gaia.lightning.proto";
 option java_outer_classname = "LightningService";
 //option java_multiple_files = true;
 

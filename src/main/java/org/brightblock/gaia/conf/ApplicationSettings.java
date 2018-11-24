@@ -1,4 +1,4 @@
-package org.brightblock.mam.conf;
+package org.brightblock.gaia.conf;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -9,11 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "application")
 public class ApplicationSettings {
 	private String confluenceBase;
-	private String blockstackNamesIndex;
-	private String artMarketIndex;
-	private String auctionIndex;
-	private String blockstackBase;
-	private String blockstackOrgBase;
 	private String bitcoinBase;
 	private String lightningCertFileName;
 	private String lightningBase;
@@ -23,7 +18,8 @@ public class ApplicationSettings {
 	private String bitcoinRpcUser;
 	private String bitcoinTestRpcPasssword;
 	private String bitcoinTestRpcUser;
-	private String domainString;
+	private String dropboxApiKey;
+	private String dropboxApiSecret;
 
 	public String getBitcoinRpcUser() {
 		return bitcoinRpcUser;
@@ -55,14 +51,6 @@ public class ApplicationSettings {
 
 	public void setBitcoinBase(String bitcoinBase) {
 		this.bitcoinBase = bitcoinBase;
-	}
-
-	public String getBlockstackBase() {
-		return blockstackBase;
-	}
-
-	public void setBlockstackBase(String blockstackBase) {
-		this.blockstackBase = blockstackBase;
 	}
 
 	public String getBitcoinTestRpcUser() {
@@ -113,43 +101,19 @@ public class ApplicationSettings {
 		this.lightningPortBob = lightningPortBob;
 	}
 
-	public String getBlockstackNamesIndex() {
-		return blockstackNamesIndex;
+	public String getDropboxApiSecret() {
+		return dropboxApiSecret;
 	}
 
-	public void setBlockstackNamesIndex(String blockstackNamesIndex) {
-		this.blockstackNamesIndex = blockstackNamesIndex;
+	public void setDropboxApiSecret(String dropboxApiSecret) {
+		this.dropboxApiSecret = dropboxApiSecret;
 	}
 
-	public String getArtMarketIndex() {
-		return artMarketIndex;
+	public String getDropboxApiKey() {
+		return dropboxApiKey;
 	}
 
-	public void setArtMarketIndex(String artMarketIndex) {
-		this.artMarketIndex = artMarketIndex;
-	}
-
-	public String getDomainString() {
-		return domainString;
-	}
-
-	public void setDomainString(String domainString) {
-		this.domainString = domainString;
-	}
-
-	public String getAuctionIndex() {
-		return auctionIndex;
-	}
-
-	public void setAuctionIndex(String auctionIndex) {
-		this.auctionIndex = auctionIndex;
-	}
-
-	public String getBlockstackOrgBase() {
-		return blockstackOrgBase;
-	}
-
-	public void setBlockstackOrgBase(String blockstackOrgBase) {
-		this.blockstackOrgBase = blockstackOrgBase;
+	public void setDropboxApiKey(String dropboxApiKey) {
+		this.dropboxApiKey = dropboxApiKey;
 	}
 }

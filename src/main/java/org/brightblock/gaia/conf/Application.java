@@ -1,4 +1,4 @@
-package org.brightblock.mam.conf;
+package org.brightblock.gaia.conf;
 
 import java.util.Arrays;
 

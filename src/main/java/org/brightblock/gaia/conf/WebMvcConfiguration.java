@@ -1,4 +1,4 @@
-package org.brightblock.mam.conf;
+package org.brightblock.gaia.conf;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
