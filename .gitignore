@@ -1,0 +1,6 @@
+target
+*.gz
+.settings
+.project
+**/.DS_Store
+
