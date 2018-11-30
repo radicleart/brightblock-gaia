@@ -1,10 +1,29 @@
 application:
    bitcoinBase: http://localhost:8332
 gaia:
-   challengeText: text-which-must-be-signed-to-validate-requests
-   readUrlPrefix: https://gaia.brightblock.org/read/
+   challengeText: '["gaiahub","2018","","blockstack_storage_please_sign"]'
+   readUrlPrefix: https://brightblock.s3.amazonaws.com/
    latestAuthVersion: v1
    storageRootDirectory: /tmp/gaia-disk
+dropbox:
+   apiKey: fanqyccblkttjs1
+   apiSecret: tm4yaovo78czqi4
+aws:
+   configSecret: 
+   serverName: server
+   port: 3000'
+   driver: aws
+   bucket: brightblock
+   readUrl: https://brightblock.s3.amazonaws.com/
+   argsTransport:
+      level: warn
+      handleExceptions: true
+      stringify: true
+      timestamp: true
+      colorize: false
+      json: true
+   proofs:
+      proofsRequired: 0
 
 ---
 

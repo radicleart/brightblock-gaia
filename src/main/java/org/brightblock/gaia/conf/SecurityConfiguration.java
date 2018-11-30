@@ -8,20 +8,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    		http.cors().and()
-		.authorizeRequests()
-			.antMatchers("/resources/**", "/lnd/**", "/api/**", "/greeting", "/signup", "/", "/about", "/courses/**").permitAll()
-			.anyRequest().permitAll() //.authenticated()
-			.and().csrf().disable()
-		.formLogin()
-			.loginPage("/login").permitAll()
-			.and()
-		.httpBasic();
-    	}
-    
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().authorizeRequests().antMatchers("/resources/**", "/", "/config").permitAll().anyRequest().permitAll() // .authenticated()
+				.and().csrf().disable().formLogin().loginPage("/login").permitAll().and().httpBasic();
+	}
+
 //    @Bean
 //    UrlBasedCorsConfigurationSource corsConfigurationSource() {
 //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
