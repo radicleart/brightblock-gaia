@@ -36,8 +36,11 @@ public class V1Authentication {
 	public V1Authentication(String token) {
 		try {
 			this.token = token;
+			logger.info("JWT token: " + token);
 			this.jwt = SignedJWT.parse(token);
 			this.claims = jwt.getJWTClaimsSet();
+			logger.info("JWT claims issuer: " + this.claims.getIssuer());
+			logger.info("JWT claims: " + this.claims.getSubject());
 		} catch (Exception e) {
 			logger.error("Error token: " + token, e);
 			throw new RuntimeException("Failed to decode authentication token: " + token);
@@ -83,7 +86,7 @@ public class V1Authentication {
 		checkExpiration();
 		logger.info("Expiry: check");
 		checkTokenAndChallengeText(challengeText, issuer);
-		logger.info("Expiry: check");
+		logger.info("Token and challenge text: check");
 		return true;
 	}
 	

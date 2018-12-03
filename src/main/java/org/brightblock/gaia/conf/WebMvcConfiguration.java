@@ -30,8 +30,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins("http://localhost:8888", "https://www.openartmart.org", "http://localhost:8080", "https://staging.transit8.com", "https://www.transit8.com", "https://www.brightblock.org",
-				"https://staging.brightblock.org");
-		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins("*");
+//		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins("http://localhost:8888", "https://www.openartmart.org", "http://localhost:8080", "https://staging.transit8.com", "https://www.transit8.com", "https://www.brightblock.org",
+//				"https://staging.brightblock.org");
+		//registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins("*");
 	}
 }

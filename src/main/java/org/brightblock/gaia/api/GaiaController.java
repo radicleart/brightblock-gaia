@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,7 +109,6 @@ public class GaiaController {
 		return new ResponseEntity<HubInfoModel>(model, HttpStatus.OK);
 	}
 
-    @CrossOrigin(origins = "http://localhost:8080")
 	@RequestMapping(value = "/config", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<String> config(HttpServletRequest request, @RequestBody AWSSettings config) throws NoSuchAlgorithmException {
 	    MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -126,7 +124,6 @@ public class GaiaController {
 		return new ResponseEntity<String>("Sucess.", HttpStatus.OK);
 	}
 
-    @CrossOrigin(origins = "http://localhost:8080")
 	@RequestMapping(value = "/store/{address}/{filename:.+}", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<String> store(HttpServletRequest request, @PathVariable String address, @PathVariable String filename, @RequestBody String data) {
 		PutObjectResult result = s3.putObject(awsSettings.getBucket(), address + "/" + filename, data);
