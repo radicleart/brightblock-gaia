@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class JWTHandlerInterceptor implements HandlerInterceptor {
 
+	private static final String ERROR = "error";
 	private static final String READ = "/read/";
 	private static final Logger logger = LogManager.getLogger(JWTHandlerInterceptor.class);
 	private static final String STORE = "/store/";
@@ -31,7 +32,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 				HandlerMethod h = (HandlerMethod) handler;
 				String methodName = h.getMethod().getName();
 				logger.info("methodName: " + methodName);
-				if (!methodName.equals(HUB_INFO) && !methodName.equals(CONFIG)) {
+				if (!methodName.equals(HUB_INFO) && !methodName.equals(CONFIG) && !methodName.equals(ERROR)) {
 					String authToken = request.getHeader(AUTHORIZATION);
 					logger.info("authToken: " + authToken);
 					String path = request.getRequestURI();
@@ -48,7 +49,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 						address = path.substring(1, secondSlash);
 					}
 					authToken = authToken.split(" ")[1]; // stripe out Bearer string before passing along..
-					logger.info("Authenticating request...");
+					logger.info("Authenticating request... on address: " + address);
 					V1Authentication v1Authentication = V1Authentication.getInstance(authToken);
 					String challenge = gaiaSettings.getChallengeText();
 					boolean auth = v1Authentication.isAuthenticationValid(address, challenge, false, null);
@@ -57,7 +58,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 					}
 					logger.info("Authenticated request...");
 				} else {
-					logger.info("Hub Info or config request.");
+					logger.info("Hub Info or config or error request.");
 				}
 			} else {
 				logger.info("Unknown request.");

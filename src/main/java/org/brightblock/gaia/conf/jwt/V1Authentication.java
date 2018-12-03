@@ -103,6 +103,8 @@ public class V1Authentication {
 
 	private void checkKeysMatch(String address, String issuer) {
 		String issuerAddressB58 = issuerAddressToB58(issuer);
+		logger.info("KeysMatch: issuerAddressB58: " + issuerAddressB58);
+		logger.info("KeysMatch: address: " + address);
 		if (!issuerAddressB58.equals(address)) {
 			throw new RuntimeException("Issuer Address not allowed to write on this path");
 		}
@@ -113,11 +115,8 @@ public class V1Authentication {
 	}
 
 	public String issuerAddressToB58(String iss) {
-		logger.info("Issuer: " + iss);
-		logger.info("Issuer hex: " + new String(Hex.encode(iss.getBytes())), "UTF-8");
 		org.bitcoinj.core.ECKey key = org.bitcoinj.core.ECKey.fromPublicOnly(Hex.decode(iss.getBytes()));
 		Address issuerAddress = new Address(MainNetParams.get(), key.getPubKeyHash());
-		logger.info("Issuer getPublicKeyAsHex: " + key.getPublicKeyAsHex());
 		return issuerAddress.toBase58();
 	}
 
