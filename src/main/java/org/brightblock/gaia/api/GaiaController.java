@@ -29,7 +29,6 @@ import org.springframework.web.client.RestTemplate;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 @Controller
@@ -81,7 +80,7 @@ public class GaiaController {
 //        };
 //	}
 
-	@RequestMapping(value = "/{address}/{filename:.+}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/read/{address}/{filename:.+}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<String> getFile(HttpServletRequest request, HttpServletResponse response, @PathVariable String address, @PathVariable String filename) {
 		try {
 			String s3Object = s3.getObjectAsString(awsSettings.getBucket(), address + "/" + filename);
@@ -125,11 +124,12 @@ public class GaiaController {
 	}
 
 	@RequestMapping(value = "/store/{address}/{filename:.+}", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<String> store(HttpServletRequest request, @PathVariable String address, @PathVariable String filename, @RequestBody String data) {
-		PutObjectResult result = s3.putObject(awsSettings.getBucket(), address + "/" + filename, data);
-		return new ResponseEntity<String>("File stored. " + result.getETag(), HttpStatus.OK);
+	public ResponseEntity<StoreResponseModel> store(HttpServletRequest request, @PathVariable String address, @PathVariable String filename, @RequestBody String data) {
+		s3.putObject(awsSettings.getBucket(), address + "/" + filename, data);
+		return new ResponseEntity<StoreResponseModel>(new StoreResponseModel(gaiaSettings.getReadUrlPrefix() + address + "/" + filename), HttpStatus.OK);
 	}
-
+	// "{"publicURL":"https://gaia.blockstack.org/hub/14FXKtccHBNfKpc7JoAyDf4mrGKR5CbyDT/profile.json"}"
+	
 	@RequestMapping(value = "/list-files/{address}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<String>> listFiles(HttpServletRequest request, @PathVariable String address) {
 		List<String> filenames = new ArrayList<>();

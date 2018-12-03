@@ -2,7 +2,7 @@ application:
    bitcoinBase: http://localhost:8332
 gaia:
    challengeText: '["gaiahub","2018","","blockstack_storage_please_sign"]'
-   readUrlPrefix: https://brightblock.s3.amazonaws.com/
+   readUrlPrefix: https://gaia.brightblock.org/read/
    latestAuthVersion: v1
    storageRootDirectory: /tmp/gaia-disk
 dropbox:

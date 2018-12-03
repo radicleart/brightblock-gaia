@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class JWTHandlerInterceptor implements HandlerInterceptor {
 
+	private static final String READ = "/read/";
 	private static final Logger logger = LogManager.getLogger(JWTHandlerInterceptor.class);
 	private static final String STORE = "/store/";
 	private static final String AUTHORIZATION = "Authorization";
@@ -39,6 +40,9 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 					} else if (path.startsWith(STORE)) {
 						int secondSlash = path.lastIndexOf("/");
 						address = path.substring(STORE.length(), secondSlash);
+					} else if (path.startsWith(READ)) {
+						int secondSlash = path.lastIndexOf("/");
+						address = path.substring(READ.length(), secondSlash);
 					} else {
 						int secondSlash = path.lastIndexOf("/");
 						address = path.substring(1, secondSlash);
