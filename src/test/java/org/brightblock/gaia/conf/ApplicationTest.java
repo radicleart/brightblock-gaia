@@ -2,7 +2,7 @@ package org.brightblock.gaia.conf;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.brightblock.gaia.api.GaiaController;
+import org.brightblock.gaia.api.GaiaAdminController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ApplicationTest {
 	
     @Autowired
-    private GaiaController controller;
+    private GaiaAdminController controller;
 
     @Test
     public void contextLoads() throws Exception {
