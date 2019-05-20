@@ -29,6 +29,11 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 @Controller
 @CrossOrigin(origins = { "http://localhost:8080", "https://radicle.art", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
+/**
+ * @see https://github.com/blockstack/gaia
+ * @author mike cohen
+ *
+ */
 public class GaiaHubController {
 
 	// https://hub.blockstack.org http://localhost:8195
