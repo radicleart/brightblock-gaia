@@ -2,7 +2,8 @@ application:
    bitcoinBase: http://localhost:8332
 gaia:
    challengeText: '["gaiahub","2018","","blockstack_storage_please_sign"]'
-   readUrlPrefix: https://gaia.brightblock.org/read/
+   readUrlShort: https://brightblock.s3.amazonaws.com/
+   readUrlPrefix: https://s3.eu-west-2.amazonaws.com/brightblock/
    latestAuthVersion: v1
    storageRootDirectory: /tmp/gaia-disk
 dropbox:
@@ -14,7 +15,8 @@ aws:
    port: 3000
    driver: aws
    bucket: brightblock
-   readUrl: https://brightblock.s3.amazonaws.com/
+   readUrlShort: https://brightblock.s3.amazonaws.com/
+   readUrlPrefix: https://s3.eu-west-2.amazonaws.com/brightblock/
    argsTransport:
       level: warn
       handleExceptions: true

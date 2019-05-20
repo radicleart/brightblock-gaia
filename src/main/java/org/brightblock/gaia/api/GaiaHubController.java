@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,10 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 @Controller
+@CrossOrigin(origins = { "http://localhost:8080", "https://radicle.art", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
 public class GaiaHubController {
 
+	// https://hub.blockstack.org http://localhost:8195
 	@Autowired private GaiaSettings gaiaSettings;
 	@Autowired private AWSSettings awsSettings;
 	final AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();

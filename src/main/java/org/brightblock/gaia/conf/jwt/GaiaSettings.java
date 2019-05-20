@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class GaiaSettings {
 	private String challengeText;
 	private String readUrlPrefix;
+	private String readUrlShort;
 	private String latestAuthVersion;
 	private String storageRootDirectory;
 	private List<AWSSettings> configs;
@@ -82,6 +83,14 @@ public class GaiaSettings {
 		if (!update) {
 			this.configs.add(configModel);
 		}
+	}
+
+	public String getReadUrlShort() {
+		return readUrlShort;
+	}
+
+	public void setReadUrlShort(String readUrlShort) {
+		this.readUrlShort = readUrlShort;
 	}
 
 }
