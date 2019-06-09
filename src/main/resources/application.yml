@@ -6,6 +6,9 @@ gaia:
    readUrlPrefix: https://s3.eu-west-2.amazonaws.com/brightblock/
    latestAuthVersion: v1
    storageRootDirectory: /tmp/gaia-disk
+   whitelist:
+     - "1EELUEFaFakdrZuGf9Yf2YLLrjj3sHYBKb"
+     - "1GyjKthxcsLfW5qDFZkzx9eRkCDTQMprMS"
 dropbox:
    apiKey: fanqyccblkttjs1
    apiSecret: tm4yaovo78czqi4

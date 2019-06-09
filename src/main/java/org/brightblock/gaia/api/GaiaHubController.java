@@ -1,5 +1,9 @@
 package org.brightblock.gaia.api;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +28,12 @@ import org.springframework.web.client.RestClientException;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.AccessControlList;
+import com.amazonaws.services.s3.model.GroupGrantee;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.Permission;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 @Controller
@@ -60,9 +69,29 @@ public class GaiaHubController {
 	}
 
 	@RequestMapping(value = "/store/{address}/{filename:.+}", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<StoreResponseModel> store(HttpServletRequest request, @PathVariable String address, @PathVariable String filename, @RequestBody String data) {
-		s3.putObject(awsSettings.getBucket(), address + "/" + filename, data);
+	public ResponseEntity<StoreResponseModel> store(HttpServletRequest request, @PathVariable String address, @PathVariable String filename, @RequestBody String data) throws IOException {
+		
+		InputStream inputStream = new ByteArrayInputStream(data.getBytes(Charset.forName("UTF-8")));
+        
+		ObjectMetadata omd = new ObjectMetadata();
+        omd.setContentType(MediaType.TEXT_PLAIN.toString());
+		PutObjectRequest por = new PutObjectRequest(awsSettings.getBucket(), address + "/" + filename, inputStream, omd);
+        
+		AccessControlList acl = new AccessControlList();
+        acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+		por.setAccessControlList(acl);
+		s3.putObject(por);
 		return new ResponseEntity<StoreResponseModel>(new StoreResponseModel(gaiaSettings.getReadUrlPrefix() + address + "/" + filename), HttpStatus.OK);
+
+		
+//		S3Object s3Object = s3.getObject(awsSettings.getBucket(), address + "/" + filename);
+//		AccessControlList acl = s3.getObjectAcl(awsSettings.getBucket(), address + "/" + filename);
+//		//acl.getGrantsAsList().clear();
+//        acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+//		PutObjectRequest por = new PutObjectRequest(awsSettings.getBucket(), address + "/" + filename, inputStream, omd);
+//		por.setAccessControlList(acl);
+//		s3.putObject(por);
+//		return new ResponseEntity<StoreResponseModel>(new StoreResponseModel(gaiaSettings.getReadUrlPrefix() + address + "/" + filename), HttpStatus.OK);
 	}
 	// "{"publicURL":"https://gaia.blockstack.org/hub/14FXKtccHBNfKpc7JoAyDf4mrGKR5CbyDT/profile.json"}"
 	

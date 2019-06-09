@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -76,10 +77,12 @@ public class V1Authentication {
 	 *
 	 * this throws a ValidationError if the authentication is invalid
 	 */
-	public boolean isAuthenticationValid(String address, String challengeText, boolean requireCorrectHubUrl, String[] validHubUrls) {
+	public boolean isAuthenticationValid(String address, String challengeText, boolean requireCorrectHubUrl, String[] validHubUrls, List<String> whitelist) {
 		logger.info("===========================================================================");
 		String issuer = getIssuer();
 		checkKeysMatch(address, issuer);
+		logger.info("keys match: check");
+		checkAddressAgainstWhitelist(address, whitelist);
 		logger.info("keys match: check");
 		checkHubUrls(requireCorrectHubUrl, validHubUrls);
 		logger.info("hub urls: check");
@@ -112,6 +115,18 @@ public class V1Authentication {
 //		if (!issuer.equals(bitcoinAddressHex)) {
 //			throw new RuntimeException("Issuer Address not allowed to write on this path");
 //		}
+	}
+
+	private boolean checkAddressAgainstWhitelist(String address, List<String> whitelist) {
+		if (whitelist == null || whitelist.isEmpty()) {
+			return true;
+		}
+		for (String key : whitelist) {
+			if (address.equals(key)) {
+				return true;
+			}
+		}
+		throw new RuntimeException("Address is not whitelisted.");
 	}
 
 	public String issuerAddressToB58(String iss) {

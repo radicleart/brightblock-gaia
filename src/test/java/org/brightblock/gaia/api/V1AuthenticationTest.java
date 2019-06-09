@@ -81,14 +81,14 @@ public class V1AuthenticationTest {
 	@Test
 	public void testAddress1() throws Exception {
 		V1Authentication v1Authentication = V1Authentication.getInstance(v1Token1);
-		boolean auth = v1Authentication.isAuthenticationValid(address1_58, challengeText, false, null);
+		boolean auth = v1Authentication.isAuthenticationValid(address1_58, challengeText, false, null, null);
 		assertTrue(auth);
 	}
 
 	@Test
 	public void testAddress2() throws Exception {
 		V1Authentication v1Authentication = V1Authentication.getInstance(v1Token2);
-		boolean auth = v1Authentication.isAuthenticationValid(address2_58, challengeText, false, null);
+		boolean auth = v1Authentication.isAuthenticationValid(address2_58, challengeText, false, null, null);
 		assertTrue(auth);
 	}
 

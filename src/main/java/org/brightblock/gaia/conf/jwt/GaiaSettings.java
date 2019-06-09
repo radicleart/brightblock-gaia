@@ -18,6 +18,7 @@ public class GaiaSettings {
 	private String latestAuthVersion;
 	private String storageRootDirectory;
 	private List<AWSSettings> configs;
+	private List<String> whitelist;
 
 	public String getChallengeText() {
 		return challengeText;
@@ -91,6 +92,14 @@ public class GaiaSettings {
 
 	public void setReadUrlShort(String readUrlShort) {
 		this.readUrlShort = readUrlShort;
+	}
+
+	public List<String> getWhitelist() {
+		return whitelist;
+	}
+
+	public void setWhitelist(List<String> whitelist) {
+		this.whitelist = whitelist;
 	}
 
 }

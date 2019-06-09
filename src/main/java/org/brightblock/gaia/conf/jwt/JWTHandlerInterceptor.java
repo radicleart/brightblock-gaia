@@ -52,7 +52,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 					logger.info("Authenticating request... on address: " + address);
 					V1Authentication v1Authentication = V1Authentication.getInstance(authToken);
 					String challenge = gaiaSettings.getChallengeText();
-					boolean auth = v1Authentication.isAuthenticationValid(address, challenge, false, null);
+					boolean auth = v1Authentication.isAuthenticationValid(address, challenge, false, null, gaiaSettings.getWhitelist());
 					if (!auth) {
 						throw new Exception("Failed validation of jwt token");
 					}
