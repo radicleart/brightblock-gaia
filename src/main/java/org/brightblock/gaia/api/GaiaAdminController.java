@@ -23,7 +23,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 @Controller
-@CrossOrigin(origins = { "http://localhost:8080", "https://radicle.art", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
+@CrossOrigin(origins = { "http://localhost:8080", "https://radicle.art", "https://dbid.io", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
 public class GaiaAdminController {
 
 	private static final String _064X = "%064x";
