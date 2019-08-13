@@ -1,5 +1,6 @@
 application:
-   bitcoinBase: http://localhost:8332
+   bitcoinHost: http://localhost
+   bitcoinPort: 8332
 gaia:
    challengeText: '["gaiahub","2018","","blockstack_storage_please_sign"]'
    readUrlShort: https://brightblock.s3.amazonaws.com/
@@ -36,25 +37,29 @@ spring:
     profiles: test
 application:
    bitcoinBase: http://localhost:8332
+   bitcoinPort: 18332
 
 ---
 
 spring:
     profiles: docker-dev
 application:
-   bitcoinBase: http://docker.for.mac.localhost:8332
+   bitcoinHost: http://docker.for.mac.localhost
+   bitcoinPort: 18332
 
 ---
 
 spring:
     profiles: staging
 application:
-   bitcoinBase: http://172.18.0.1:8332
+   bitcoinHost: http://172.18.0.1
+   bitcoinPort: 18332
                
 ---
 
 spring:
     profiles: production
 application:
-   bitcoinBase: http://172.18.0.1:8332
+   bitcoinHost: http://172.18.0.1
+   bitcoinPort: 8332
 
