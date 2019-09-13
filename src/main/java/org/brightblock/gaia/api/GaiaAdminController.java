@@ -88,7 +88,4 @@ public class GaiaAdminController {
 	   	gaiaSettings.addConfig(config);
 		return new ResponseEntity<String>("Sucess.", HttpStatus.OK);
 	}
-
-	
-
 }
