@@ -13,21 +13,19 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "application")
 public class ApplicationSettings {
-	private static final String PROTOCOL = "http://";
-	private static final String COLON = ":";
-	private String bitcoinBase;
-	private String bitcoinHost;
-	private String bitcoinPort;
+	private String blockstackBase;
+	private String blockstackOrgBase;
+	private String mongoIp;
+	private String containerHostIp;
 	@Value("${spring.profiles.active}")
 	private String activeProfile;
 
 	public ApplicationSettings() {
 		super();
         try {
-            Process p = Runtime.getRuntime().exec("ip route show");
+    		Process p = Runtime.getRuntime().exec("ip route show");
             
-            BufferedReader stdInput = new BufferedReader(new 
-                 InputStreamReader(p.getInputStream()));
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             // read the output from the command
             String s = null;
@@ -35,13 +33,10 @@ public class ApplicationSettings {
                 System.out.println("Found: " + s);
             	if (s.indexOf("default") > -1) {
             		String[] parts = s.split(" ");
-            		bitcoinBase = parts[2];
+            		containerHostIp = parts[2];
             	}
             }
-            System.out.println("Found host IP=" + bitcoinBase);
-            if (activeProfile != "staging" && activeProfile != "productions") {
-            	bitcoinBase = null;
-            }
+            System.out.println("Found host IP=" + containerHostIp);
         }
         catch (IOException e) {
             System.out.println("exception happened - here's what I know: ");
@@ -49,26 +44,32 @@ public class ApplicationSettings {
         }
 	}
 
-	public String getBitcoinPort() {
-		return bitcoinPort;
+	public String getBlockstackBase() {
+		return blockstackBase;
 	}
 
-	public void setBitcoinPort(String bitcoinPort) {
-		this.bitcoinPort = bitcoinPort;
+	public void setBlockstackBase(String blockstackBase) {
+		this.blockstackBase = blockstackBase;
 	}
 
-	public String getBitcoinHost() {
-		return bitcoinHost;
+	public String getBlockstackOrgBase() {
+		return blockstackOrgBase;
 	}
 
-	public void setBitcoinHost(String bitcoinHost) {
-		this.bitcoinHost = bitcoinHost;
+	public void setBlockstackOrgBase(String blockstackOrgBase) {
+		this.blockstackOrgBase = blockstackOrgBase;
 	}
 
-	public String getBitcoinBase() {
-		if (bitcoinBase != null) {
-			return PROTOCOL + bitcoinBase + COLON + bitcoinPort;
-		}
-		return bitcoinHost + COLON + bitcoinPort;
+	public String getMongoIp() {
+        System.out.println("ACTIVE SPRING PROFILE = " + activeProfile);
+		if (activeProfile.equals("staging") || activeProfile.equals("production")) {
+        	return containerHostIp;
+		} else {
+    		return mongoIp;
+        }
+	}
+
+	public void setMongoIp(String mongoIp) {
+		this.mongoIp = mongoIp;
 	}
 }

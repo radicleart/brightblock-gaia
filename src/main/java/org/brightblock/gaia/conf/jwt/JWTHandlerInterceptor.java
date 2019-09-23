@@ -54,7 +54,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 					String challenge = gaiaSettings.getChallengeText();
 					boolean auth = v1Authentication.isAuthenticationValid(address, challenge, false, null, gaiaSettings.getWhitelist());
 					if (!auth) {
-						throw new Exception("Failed validation of jwt token");
+						throw new IllegalAccessException("Not authorised to make this request");
 					}
 					logger.info("Authenticated request...");
 				} else {
@@ -64,7 +64,7 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
 				logger.info("Unknown request.");
 			}
 		} catch (Exception e) {
-			throw e;
+			throw new IllegalAccessException("Not authorised to make this request");
 		}
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
