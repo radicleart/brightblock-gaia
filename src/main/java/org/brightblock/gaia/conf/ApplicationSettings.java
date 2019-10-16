@@ -61,7 +61,6 @@ public class ApplicationSettings {
 	}
 
 	public String getMongoIp() {
-        System.out.println("ACTIVE SPRING PROFILE = " + activeProfile);
 		if (activeProfile.equals("staging") || activeProfile.equals("production")) {
         	return containerHostIp;
 		} else {
