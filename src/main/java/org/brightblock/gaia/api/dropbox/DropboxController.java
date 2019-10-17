@@ -17,7 +17,7 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.users.FullAccount;
 
 @Controller
-@CrossOrigin(origins = { "http://localhost:8080", "http://localhost:8081", "https://radicle.art", "https://tart.radiclesociety.org", "https://tdbid.radiclesociety.org",  "https://dbid.io", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
+@CrossOrigin(origins = { "http://localhost:8080", "http://localhost:8081", "https://loopbomb.com", "https://test.loopbomb.com", "https://radicle.art", "https://tart.radiclesociety.org", "https://tdbid.radiclesociety.org",  "https://dbid.io", "https://brightblock.org", "http://localhost:8888" }, maxAge = 6000)
 public class DropboxController {
 
 	@Autowired private DbxClientV2 client;
