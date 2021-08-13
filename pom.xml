@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.46</version>
+			<version>1.67</version>
 		</dependency>
 
 		<!-- below added on advice from: https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9 
